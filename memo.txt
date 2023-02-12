@@ -12,3 +12,4 @@ CLASS_NAMEの指定は一つだけ
 複数のクラスを指定する方法
 ⇒ driver.find_element(By.CSS_SELECTOR, "【div】[　【class='VbY1P T6Va1 Z4n09 EditorClass']"】　).send_keys(〇〇)
 
+追記出来たらいい
