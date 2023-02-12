@@ -1,5 +1,5 @@
-
 number = input("番号")
+from os import environ
 from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -20,9 +20,9 @@ driver.implicitly_wait(10)
 wait = WebDriverWait(driver, 10)
 
 driver.get("https://login.live.com/login.srf?wa=wsignin1.0&rpsnv=13&ct=1675938175&rver=7.0.6737.0&wp=MBI_SSL&wreply=https%3a%2f%2foutlook.live.com%2fowa%2f%3fnlp%3d1%26RpsCsrfState%3d686921c1-d52b-5d19-d63b-f5d4dfa2bb57&id=292841&aadredir=1&CBCXT=out&lw=1&fl=dob%2cflname%2cwld&cobrandid=90015")
-driver.find_element(By.CSS_SELECTOR, 'input[type="email"]').send_keys("64")
+driver.find_element(By.CSS_SELECTOR, 'input[type="email"]').send_keys(environ["g-add"])
 driver.find_element(By.ID, "idSIButton9").click()
-driver.find_element(By.CSS_SELECTOR, 'input[type="password"]').send_keys("Ume")
+driver.find_element(By.CSS_SELECTOR, 'input[type="password"]').send_keys(environ["g-pass"])
 wait.until(expected_conditions.visibility_of_element_located((By.ID, "idSIButton9")))
 # wait.until(expected_conditions.element_to_be_clickable((By.ID, "idSIButton9")))
 driver.find_element(By.ID, "idSIButton9").click()
