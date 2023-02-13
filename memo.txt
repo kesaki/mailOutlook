@@ -13,3 +13,90 @@ CLASS_NAMEの指定は一つだけ
 ⇒ driver.find_element(By.CSS_SELECTOR, "【div】[　【class='VbY1P T6Va1 Z4n09 EditorClass']"】　).send_keys(〇〇)
 
 追記出来たらいい
+
+
+import xlrd
+import datetime
+file = "X:/03.導入展開/0001.LinQ_導入スケジュール/作業管理.xls"
+wb = xlrd.open_workbook(file)
+ws1 = wb.sheet_by_index(0)
+
+def get_row_no(key):
+  for r in range(ws1.nrows):
+    try:
+      num = str(int(ws1.cell(r, 0).value))
+    except:
+      continue
+    if  num == key:
+      return r
+      break
+
+def ser_to_dt(serialVal:float) -> datetime:
+    dtime = (datetime.datetime(1899,12,30) + datetime.timedelta(serialVal))
+    return dtime
+
+number = input("番号")
+row_no = get_row_no(number)
+
+salon_name = ws1.cell(row_no, 2).value
+salon_code = ws1.cell(row_no, 46).value
+nouhin_day = ser_to_dt(ws1.cell(row_no, 12).value).strftime("%Y/%m/%d")
+nyuten_time = ser_to_dt(ws1.cell(row_no, 14).value).strftime("%H:%M")
+settei_kanryo_time = ser_to_dt(ws1.cell(row_no, 15).value).strftime("%H:%M")
+taiten_time = ser_to_dt(ws1.cell(row_no, 17).value).strftime("%H:%M")
+
+atesaki = "tb_service_ml@takara-net.com"
+cc_atesaki = "vjc_inst@salonpos-net.com"
+title = f"■導入完了【{number}】 {salon_name}】★"
+
+
+
+
+m_txt = f"""
+
+宛先：
+
+{atesaki}
+
+===================================================
+CC：
+
+
+{cc_atesaki}
+
+===================================================
+タイトル：
+
+
+{title}
+
+===================================================
+本文：
+
+
+【導入完了報告】
+以下案件の導入作業が完了致しましたので、
+ご報告致します。
+
+　　　サロン名：{salon_name}
+　　　サロンコード：{salon_code}
+　　　納品日付：{nouhin_day}
+　　　入店時間：{nyuten_time}
+　　　設定完了時間：{settei_kanryo_time}
+　　　退店時間：{taiten_time}
+
+【申し送り】
+
+
+
+以上、よろしくお願い致します。
+
+"""
+
+with open("mail.txt", "w")as f:
+  f.write(m_txt)
+  f.close
+
+if __name__ == "__main__":
+  import subprocess
+  subprocess.Popen(["notepad","mail.txt"])
