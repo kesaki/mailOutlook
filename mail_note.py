@@ -1,3 +1,5 @@
+use_outlook = 1
+
 import xlrd
 import datetime
 from time import sleep
@@ -45,7 +47,8 @@ def gene_mail(number:str):
 
 【申し送り】
 
-
+///////////////////////////////////////////
+///////////////////////////////////////////
 
 以上、よろしくお願い致します。
 
@@ -73,14 +76,16 @@ def gene_mail(number:str):
   except:
     return "行が見つかりませんでした"
 
+mail_data = gene_mail(input("番号"))
+if not isinstance(mail_data, dict):
+  print(mail_data)
+  sleep(2)
+else:
+  if use_outlook:
+    import outlook9222
+    outlook9222.send_by_outlook(mail_data)
 
-
-if __name__ == "__main__":
-  mail_data = gene_mail(input("番号"))
-  if type(mail_data) != dict:
-    print(mail_data)
-    sleep(2)
-  else:  
+  else:
     import subprocess
     subprocess.Popen(["notepad","mail.txt"])
 
