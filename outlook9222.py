@@ -16,7 +16,6 @@ def send_by_outlook(mail_data):
   try:
     driver.find_element(By.CSS_SELECTOR, "div[aria-label='新規メール']").click()
   except:
-    print("まったけどね")
     pass
 
   driver.find_element(By.CSS_SELECTOR, "div[class='VbY1P T6Va1 Z4n09 EditorClass']").send_keys(mail_data["atesaki"])
