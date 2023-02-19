@@ -1,4 +1,4 @@
-use_outlook = 1
+use_outlook = 0
 use_reinstall_memo = 1
 import xlrd
 import datetime
@@ -38,49 +38,39 @@ def gene_mail(number:str):
       import 再インストールメモ as re
       sauce = re.get_sauce(salon_name)
     else:
-      sauce = "///////////////////////////////////"  
+      sauce = "\n////////////////////////////////////\n////////////////////////////////////\n"  
+
     mail_main = f"""
-    
 【導入完了報告】
 以下案件の導入作業が完了致しましたので、
-ご報告致します。
-
+ご報告致します。\n
 　　　サロン名：{salon_name}
 　　　サロンコード：{salon_code}
 　　　納品日付：{nouhin_date}
 　　　入店時間：{nyuten_time}
 　　　設定完了時間：{settei_kanryo_time}
-　　　退店時間：{taiten_time}
-
+　　　退店時間：{taiten_time}\n
 【申し送り】
-
 {sauce}
-
-以上、よろしくお願い致します。
-
+以上、よろしくお願い致します。\n
 """
+
     mail_text = f"""
-    宛先：
-    {atesaki}
-    ===================
-    CC:
-    {cc_atesaki}
-
-    ===================
-    タイトル：
-    {mail_title}
-
-    ====================
-    本文：
-    {mail_main}
-
+宛先：\n{atesaki}\n
+=========================================================\n
+CC:\n{cc_atesaki}\n
+=========================================================\n
+タイトル：\n{mail_title}\n
+=========================================================\n
+本文：\n{mail_main}\n
 """
+
     with open("mail.txt", "w")as f:
       f.write(mail_text)
       f.close   
     return {"atesaki": atesaki, "cc_atesaki": cc_atesaki, "mail_title": mail_title, "mail_main": mail_main, "mail_text": mail_text}
   except:
-    return "行が見つかりませんでした"
+    return "行,値が見つかりませんでした"
 
 mail_data = gene_mail(input("番号"))
 if not isinstance(mail_data, dict):
