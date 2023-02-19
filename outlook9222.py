@@ -19,7 +19,7 @@ def send_by_outlook(mail_data):
     pass
 
   driver.find_element(By.CSS_SELECTOR, "div[class='VbY1P T6Va1 Z4n09 EditorClass']").send_keys(mail_data["atesaki"])
-  driver.find_element(By.CSS_SELECTOR, "div[aria-label='CC']").send_keys(mail_data["cc_atesaki"])
+  # driver.find_element(By.CSS_SELECTOR, "div[aria-label='CC']").send_keys(mail_data["cc_atesaki"])
   driver.find_element(By.XPATH, "//*[@class='P6mmz']/div/div/div/input").send_keys(mail_data["mail_title"])
   driver.find_element(By.CSS_SELECTOR, "div[class='dFCbN k1Ttj dPKNh DziEn']").clear()
   driver.find_element(By.CSS_SELECTOR, "div[aria-label='メッセージ本文、Alt+F10を押して終了します']").send_keys(mail_data["mail_main"]+syomei)

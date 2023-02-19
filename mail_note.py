@@ -1,11 +1,12 @@
 use_outlook = 1
-
+use_reinstall_memo = 1
 import xlrd
 import datetime
 from time import sleep
 file = "sample.xls"
 wb = xlrd.open_workbook(file)
 ws1 = wb.sheet_by_index(0)
+
 
 def get_row_no(key):
   for r in range(ws1.nrows):
@@ -32,6 +33,13 @@ def gene_mail(number:str):
     atesaki = "tb_aaaaaanet.com"
     cc_atesaki = "vjcaaaaaaa-net.com"
     mail_title = f"■導入完了【{number}】 {salon_name}】★"
+    #ここ
+    if use_reinstall_memo:
+      print(salon_name)
+      import 再インストールメモ as re
+      sauce = re.get_sauce(salon_name)
+    else:
+      sauce = "///////////////////////////////////"  
     mail_main = f"""
     
 【導入完了報告】
@@ -47,8 +55,7 @@ def gene_mail(number:str):
 
 【申し送り】
 
-///////////////////////////////////////////
-///////////////////////////////////////////
+{sauce}
 
 以上、よろしくお願い致します。
 
