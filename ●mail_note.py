@@ -35,7 +35,6 @@ def gene_mail(number:str):
     mail_title = f"■導入完了【{number}】 {salon_name}】★"
     #ここ
     if use_reinstall_memo:
-      print(salon_name)
       import 再インストールメモ as re
       sauce = re.get_sauce(salon_name)
     else:
